@@ -1,6 +1,6 @@
 
 
-mediationresultsci <- function(n, reps, Tot, prop_med, beta2, M_error, weak)
+mediationresultsci <- function(n, reps, Tot, prop_med, beta2, M_error)
 {
 
   if (M_error == "exposure"){
@@ -15,22 +15,10 @@ mediationresultsci <- function(n, reps, Tot, prop_med, beta2, M_error, weak)
   }
   
   
-  if (weak == "exposure"){
-    pi1 = 0.05
-    pi1b = 0.95
-    pi2 = 1.0
-    pi2b = 0
-  } else if (weak == "mediator"){
-    pi1 = 1.0
-    pi1b = 0
-    pi2 = 0.05
-    pi2b = 0.95
-  }  else {
     pi1 = 0.7
     pi1b = 0.3
     pi2 = 1.0
-    pi2b = 0
-  }
+  
   
   gamma = (Tot*prop_med)/beta2
   beta1 = Tot - gamma*beta2
@@ -64,7 +52,7 @@ for (i in 1:reps) {
 PGRS1 <- rnorm(n,0,1)
 PGRS1b <- rnorm(n,0,1)
 PGRS2 <- rnorm(n,0,1)
-PGRS2b <- rnorm(n,0,1)
+
 
 
 mu = c(0,0,0)
@@ -74,7 +62,7 @@ v = mvrnorm(n, mu, s)
 
 Edu_true <-  pi1*PGRS1 + pi1b*PGRS1b + v[,2]
 Edu <- Edu_true + rnorm(n, 0, me_var_exp)
-BMI_true <-  gamma*Edu_true + pi2*PGRS2 + pi2b*PGRS2b + v[,3]
+BMI_true <-  gamma*Edu_true + pi2*PGRS2 + v[,3]
 BMI <- BMI_true + rnorm(n, 0, me_var_med)
 
 sbp <- (beta1)*Edu_true + beta2*BMI_true + v[,1]
