@@ -11,7 +11,7 @@ rm(list = ls(all=TRUE))
 set.seed(100)
 source("mediation_function.R")
 n= 5000
-reps = 2
+reps = 1000
 
 
 #1. No mediaton 

@@ -29,7 +29,7 @@ p_med_ols <- cbind((o$ols_s_e-o$ols_s_eb_e)/o$ols_s_e, (o$ols_b_e*o$ols_s_b)/o$o
 results_ind_ols <- cbind(results_ind_ols, p_med_ols)
 
 results_ind_mr <- cbind(o$mr_s_e, o$mvmr_s_eb_e, o$mr_b_e*o$mvmr_s_eb_b, o$mr_m1_e*o$mvmr_s_eb_m1, o$mr_m2_e*o$mvmr_s_eb_m2, o$mr_b_e*o$mr_s_b, o$mr_m1_e*o$mr_s_m1, o$mr_m2_e*o$mr_s_m2)
-p_med_mr <- cbind((o$mr_s_e-o$mr_s_eb_e)/o$mr_s_e, (o$mr_b_e*o$mr_s_b)/o$mr_s_e, (o$mr_m1_e*o$mr_s_m1)/o$mr_s_e, (o$mr_m2_e*o$mr_s_m2)/o$mr_s_e)
+p_med_mr <- cbind((o$mr_s_e-o$mvmr_s_eb_e)/o$mr_s_e, (o$mr_b_e*o$mr_s_b)/o$mr_s_e, (o$mr_m1_e*o$mr_s_m1)/o$mr_s_e, (o$mr_m2_e*o$mr_s_m2)/o$mr_s_e)
 results_ind_mr <- cbind(results_ind_mr, p_med_mr)
 
 results_ind <- colMeans(results_ind_ols)
@@ -54,7 +54,7 @@ p_med_ols <- cbind((o$ols_s_e-o$ols_s_eb_e)/o$ols_s_e, (o$ols_b_e*o$ols_s_b)/o$o
 results_rel_ols <- cbind(results_rel_ols, p_med_ols)
 
 results_rel_mr <- cbind(o$mr_s_e, o$mvmr_s_eb_e, o$mr_b_e*o$mvmr_s_eb_b, o$mr_m1_e*o$mvmr_s_eb_m1, o$mr_m2_e*o$mvmr_s_eb_m2, o$mr_b_e*o$mr_s_b, o$mr_m1_e*o$mr_s_m1, o$mr_m2_e*o$mr_s_m2)
-p_med_mr <- cbind((o$mr_s_e-o$mr_s_eb_e)/o$mr_s_e, (o$mr_b_e*o$mr_s_b)/o$mr_s_e, (o$mr_m1_e*o$mr_s_m1)/o$mr_s_e, (o$mr_m2_e*o$mr_s_m2)/o$mr_s_e)
+p_med_mr <- cbind((o$mr_s_e-o$mvmr_s_eb_e)/o$mr_s_e, (o$mr_b_e*o$mr_s_b)/o$mr_s_e, (o$mr_m1_e*o$mr_s_m1)/o$mr_s_e, (o$mr_m2_e*o$mr_s_m2)/o$mr_s_e)
 results_rel_mr <- cbind(results_rel_mr, p_med_mr)
 
 
