@@ -38,7 +38,7 @@ if (mediators == "independent"){
     ols_s_e = ols_s_b = ols_s_m1 = ols_s_m2 = ols_s_eb_e = ols_s_eb_b = ols_s_eb_m1 = ols_s_eb_m2 = NULL
     mr_s_e = mr_s_b = mr_s_m1 = mr_s_m2 = NULL
     mvmr_s_eb_e = mvmr_s_eb_b = mvmr_s_eb_m1 = mvmr_s_eb_m2 = NULL
-    
+    ols_s_bmm_b = ols_s_bmm_m1 = ols_s_bmm_m2 = mvmr_s_bmm_b = mvmr_s_bmm_m1 = mvmr_s_bmm_m2 = NULL
     
 for (i in 1:reps) {
 
@@ -84,6 +84,11 @@ ols_s_eb_b[i] <- lm(sbp ~ Edu + BMI +Med1 + Med2)$coef[3]
 ols_s_eb_m1[i] <- lm(sbp ~ Edu + BMI +Med1 + Med2 )$coef[4]
 ols_s_eb_m2[i] <- lm(sbp ~ Edu + BMI +Med1 + Med2)$coef[5]
 
+
+ols_s_bmm_b[i] <- lm(sbp ~ BMI +Med1 + Med2)$coef[2]
+ols_s_bmm_m1[i] <- lm(sbp ~ BMI +Med1 + Med2 )$coef[3]
+ols_s_bmm_m2[i] <- lm(sbp ~ BMI +Med1 + Med2)$coef[4]
+
 mr_s_e[i] <- ivreg(sbp ~ Edu|PGRS1)$coef[2]
 mr_s_b[i] <- ivreg(sbp ~ BMI|PGRS2)$coef[2]
 mr_s_m1[i] <- ivreg(sbp ~ Med1|PGRS3)$coef[2]
@@ -94,6 +99,9 @@ mvmr_s_eb_b[i] <- ivreg(sbp ~ Edu+BMI+Med1+Med2|PGRS1+PGRS2+PGRS3+PGRS4)$coef[3]
 mvmr_s_eb_m1[i] <- ivreg(sbp ~ Edu+BMI+Med1+Med2|PGRS1+PGRS2+PGRS3+PGRS4)$coef[4]
 mvmr_s_eb_m2[i] <- ivreg(sbp ~ Edu+BMI+Med1+Med2|PGRS1+PGRS2+PGRS3+PGRS4)$coef[5]
 
+mvmr_s_bmm_b[i] <- ivreg(sbp ~ BMI+Med1+Med2|PGRS2+PGRS3+PGRS4)$coef[2]
+mvmr_s_bmm_m1[i] <- ivreg(sbp ~ BMI+Med1+Med2|PGRS2+PGRS3+PGRS4)$coef[3]
+mvmr_s_bmm_m2[i] <- ivreg(sbp ~ BMI+Med1+Med2|PGRS2+PGRS3+PGRS4)$coef[4]
 
 
 }
@@ -101,7 +109,7 @@ mvmr_s_eb_m2[i] <- ivreg(sbp ~ Edu+BMI+Med1+Med2|PGRS1+PGRS2+PGRS3+PGRS4)$coef[5
 resultsa <- cbind(ols_b_e, mr_b_e, ols_m1_e, mr_m1_e, ols_m2_e, mr_m2_e)
 resultsb <- cbind(ols_s_e, ols_s_b, ols_s_m1, ols_s_m2,  mr_s_e, mr_s_b, mr_s_m1, mr_s_m2)
 resultsc <- cbind(ols_s_eb_e, ols_s_eb_b, ols_s_eb_m1, ols_s_eb_m2, mvmr_s_eb_e, mvmr_s_eb_b, mvmr_s_eb_m1, mvmr_s_eb_m2)
-
+resultsd <- cbind(ols_s_bmm_b, ols_s_bmm_m1, ols_s_bmm_m2, mvmr_s_bmm_b, mvmr_s_bmm_m1, mvmr_s_bmm_m2)
 
 
 results <- data.frame(n, reps, mediators, resultsa, resultsb, resultsc)
