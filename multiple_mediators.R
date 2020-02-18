@@ -112,7 +112,7 @@ resultsc <- cbind(ols_s_eb_e, ols_s_eb_b, ols_s_eb_m1, ols_s_eb_m2, mvmr_s_eb_e,
 resultsd <- cbind(ols_s_bmm_b, ols_s_bmm_m1, ols_s_bmm_m2, mvmr_s_bmm_b, mvmr_s_bmm_m1, mvmr_s_bmm_m2)
 
 
-results <- data.frame(n, reps, mediators, resultsa, resultsb, resultsc)
+results <- data.frame(n, reps, mediators, resultsa, resultsb, resultsc, resultsd)
 
 return(results)
 
