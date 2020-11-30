@@ -33,8 +33,11 @@ resultsA <- rbind(resultsA, AA)
                          
 
 names <- c("interaction", "continuous", "beta1", "beta3", "mean_ols_b_e", "mean_mr_b_e", "mean_ols_s_e", "mean_ols_s_b", "mean_ols_s_eb_e", "mean_ols_s_eb_b", 
-           "mean_mr_s_e", "mean_mr_s_b", "mean_mvmr_s_eb_e", "mean_mvmr_s_eb_b","sd_ols_b_e", "sd_mr_b_e", "sd_ols_s_e", "sd_ols_s_b", "sd_ols_s_eb_e",
-           "sd_ols_s_eb_b", "sd_mr_s_e", "sd_mr_s_b", "sd_mvmr_s_eb_e", "sd_mvmr_s_eb_b")
+           "mean_mr_s_e", "mean_mr_s_b", "mean_mvmr_s_eb_e", "mean_mvmr_s_eb_b",
+           "mean_ols_b_e*ols_s_b", "mean_ols_s_e - ols_s_eb_e", "mean_mr_b_e*mr_s_b", "mean_mr_s_e - mvmr_s_eb_e",
+           "sd_ols_b_e", "sd_mr_b_e", "sd_ols_s_e", "sd_ols_s_b", "sd_ols_s_eb_e",
+           "sd_ols_s_eb_b", "sd_mr_s_e", "sd_mr_s_b", "sd_mvmr_s_eb_e", "sd_mvmr_s_eb_b",
+           "sd_ols_b_e*ols_s_b", "sd_ols_s_e - ols_s_eb_e", "sd_mr_b_e*mr_s_b", "sd_mr_s_e - mvmr_s_eb_e")
 
 colnames(resultsA) <- names
 

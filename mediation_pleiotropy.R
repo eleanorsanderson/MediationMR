@@ -1,6 +1,6 @@
 
 
-mediationpleiotropy <- function(n, reps, Tot, prop_med, beta2)
+mediationpleiotropy <- function(n, reps, Tot, prop_med, beta2, pleio)
 {
 
   
@@ -50,7 +50,13 @@ Edu <- Edu_true
 BMI_true <-  gamma*Edu_true + pi2*PGRS2 + v[,3]
 BMI <- BMI_true
 
+if(pleio == "exposure"){
 sbp <- (beta1)*Edu_true + beta2*BMI_true + 0.2*PGRS1 + v[,1]
+}
+if(pleio == "mediator"){
+  sbp <- (beta1)*Edu_true + beta2*BMI_true + 0.2*PGRS2 + v[,1]
+}
+
 cutoff <- quantile(sbp,0.75)
 hyp <- as.numeric(sbp>cutoff)
 

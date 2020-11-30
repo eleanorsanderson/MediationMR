@@ -103,10 +103,15 @@ if(cont == FALSE){
 
 resultsa <- cbind(ols_b_e, mr_b_e, ols_s_e, ols_s_b, ols_s_eb_e, ols_s_eb_b, mr_s_e, mr_s_b, mvmr_s_eb_e, mvmr_s_eb_b)
 
+resultsb <- cbind(ols_b_e*ols_s_b, ols_s_e - ols_s_eb_e, mr_b_e*mr_s_b, mr_s_e - mvmr_s_eb_e)
+
 cont_results <- rbind(apply(resultsa,2,mean))
 sd_cont_results <- rbind(apply(resultsa,2,sd))
 
-results <- data.frame(beta1, beta3, cont_results, sd_cont_results)
+cont_results_ind <- rbind(apply(resultsb,2,mean))
+sd_cont_results_ind <- rbind(apply(resultsb,2,sd))
+
+results <- data.frame(beta1, beta3, cont_results, cont_results_ind, sd_cont_results, sd_cont_results_ind)
 
 return(results)
 
