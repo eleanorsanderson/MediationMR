@@ -81,67 +81,21 @@ mvmr_s_eb_e[i] <- ivreg(sbp ~ Edu+BMI|PGRS1+PGRS2)$coef[2]
 mvmr_s_eb_b[i] <- ivreg(sbp ~ Edu+BMI|PGRS1+PGRS2)$coef[3]
 
 
-ols_h_e[i] <- lm(hyp ~ Edu)$coef[2]
-ols_h_b[i] <- lm(hyp ~ BMI)$coef[2]
-ols_h_eb_e[i] <- lm(hyp ~ Edu + BMI)$coef[2]
-ols_h_eb_b[i] <- lm(hyp ~ Edu + BMI)$coef[3]
-mr_h_e[i] <- ivreg(hyp ~ Edu|PGRS1)$coef[2]
-mr_h_b[i] <- ivreg(hyp ~ BMI|PGRS2)$coef[2]
-mvmr_h_eb_e[i] <- ivreg(hyp ~ Edu+BMI|PGRS1+PGRS2)$coef[2]
-mvmr_h_eb_b[i] <- ivreg(hyp ~ Edu+BMI|PGRS1+PGRS2)$coef[3]
-
-
-
-##Estimating the odds ratios
-#predict the exposures first
-
-prd_e <- lm(Edu ~ PGRS1)$fitted
-prd_b <- lm(BMI ~ PGRS2)$fitted
-prd_e_b <- lm(Edu ~ PGRS1 + PGRS2)$fitted
-prd_b_e <- lm(BMI ~ PGRS1 + PGRS2)$fitted
-
-mr_h_e_lor[i] <- (glm(hyp~prd_e,family=binomial())$coef[2])
-mr_h_b_lor[i] <- (glm(hyp~prd_b,family=binomial())$coef[2])
-mr_h_eb_e_lor[i] <- (glm(hyp~prd_e_b + prd_b_e,family=binomial())$coef[2])
-mr_h_eb_b_lor[i] <- (glm(hyp~prd_e_b + prd_b_e,family=binomial())$coef[3])
-
-mr_h_e_or[i] <- exp(mr_h_e_lor[i])
-mr_h_b_or[i] <- exp(mr_h_b_lor[i])
-mr_h_eb_e_or[i] <- exp(mr_h_eb_e_lor[i])
-mr_h_eb_b_or[i] <- exp(mr_h_eb_b_lor[i])
-
-
-ols_c_e[i] <- lm(low ~ Edu)$coef[2]
-ols_c_b[i] <- lm(low ~ BMI)$coef[2]
-ols_c_eb_e[i] <- lm(low ~ Edu + BMI)$coef[2]
-ols_c_eb_b[i] <- lm(low ~ Edu + BMI)$coef[3]
-mr_c_e[i] <- ivreg(low ~ Edu|PGRS1)$coef[2]
-mr_c_b[i] <- ivreg(low ~ BMI|PGRS2)$coef[2]
-mvmr_c_eb_e[i] <- ivreg(low ~ Edu+BMI|PGRS1+PGRS2)$coef[2]
-mvmr_c_eb_b[i] <- ivreg(low ~ Edu+BMI|PGRS1+PGRS2)$coef[3]
-
-
-mr_c_e_lor[i] <- (glm(low~prd_e,family=binomial())$coef[2])
-mr_c_b_lor[i] <- (glm(low~prd_b,family=binomial())$coef[2])
-mr_c_eb_e_lor[i] <- (glm(low~prd_e_b + prd_b_e,family=binomial())$coef[2])
-mr_c_eb_b_lor[i] <- (glm(low~prd_e_b + prd_b_e,family=binomial())$coef[3])
-
-
-mr_c_e_or[i] <- exp(mr_c_e_lor[i])
-mr_c_b_or[i] <- exp(mr_c_b_lor[i])
-mr_c_eb_e_or[i] <- exp(mr_c_eb_e_lor[i])
-mr_c_eb_b_or[i] <- exp(mr_c_eb_b_lor[i])
-
-
-
 }
 
 resultsa <- cbind(ols_b_e, mr_b_e, ols_s_e, ols_s_b, ols_s_eb_e, ols_s_eb_b, mr_s_e, mr_s_b, mvmr_s_eb_e, mvmr_s_eb_b)
 
+
+resultsb <- cbind(ols_b_e*ols_s_b, ols_s_e - ols_s_eb_e, mr_b_e*mr_s_b, mr_s_e - mvmr_s_eb_e)
+
 cont_results <- rbind(apply(resultsa,2,mean))
 sd_cont_results <- rbind(apply(resultsa,2,sd))
 
-results <- data.frame(beta1, gamma, cont_results, sd_cont_results)
+cont_results_ind <- rbind(apply(resultsb,2,mean))
+sd_cont_results_ind <- rbind(apply(resultsb,2,sd))
+
+results <- data.frame(beta1, gamma, cont_results, cont_results_ind, sd_cont_results, sd_cont_results_ind)
+
 
 return(results)
 
